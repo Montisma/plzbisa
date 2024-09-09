@@ -19,6 +19,4 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Inventaris</span></a>
     </li>
-
-    <hr class="sidebar-divider">
 </ul>
