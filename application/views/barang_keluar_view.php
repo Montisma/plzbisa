@@ -44,7 +44,7 @@
                     { "data": "id" },
                     { "data": "nama_barang" },
                     { "data": "jumlah" },
-                    { "data": "tanggal_Keluar" }
+                    { "data": "tanggal_keluar" }
                 ]
             });
         });
