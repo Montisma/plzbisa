@@ -7,6 +7,8 @@
     <title>Inventory Management</title>
     <link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/css/sb-admin-2.min.css') ?>" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 </head>
 
 <body>
@@ -100,12 +102,21 @@
                     { "data": "kondisi_barang" },
                     { "data": "tanggal_input" },
                     {
-                        "data": null,
-                        "render": function (data, type, row) {
-                            return `<button class="btn btn-warning" onclick="edit_item(${row.id})">Edit</button>
-                            <button class="btn btn-danger" onclick="delete_item(${row.id})">Delete</button>`;
-                        }
-                    }
+   "data": null,
+    "render": function (data, type, row) {
+        return `
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-cog"></i> <!-- Font Awesome gear icon -->
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="edit_item(${row.id})">Edit</a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="delete_item(${row.id})">Delete</a>
+                </div>
+            </div>`;
+    }
+}
+
                 ]
             });
 
@@ -172,7 +183,14 @@
                 });
             }
         }
+
+        
     </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>
