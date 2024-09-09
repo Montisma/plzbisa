@@ -27,4 +27,26 @@ class InventarisModel extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->delete('inventaris');
     }
+
+    public function barang_masuk($data) {
+        // Insert into barang_masuk
+        $this->db->insert('barang_masuk', $data);
+
+        // Update the inventory (add jumlah)
+        $this->db->set('jumlah', 'jumlah+' . $data['jumlah'], FALSE);
+        $this->db->where('id', $data['inventaris_id']);
+        $this->db->update('inventaris');
+    }
+
+    // Insert into barang_keluar table and update inventaris
+    public function barang_keluar($data) {
+        // Insert into barang_keluar
+        $this->db->insert('barang_keluar', $data);
+
+        // Update the inventory (subtract jumlah)
+        $this->db->set('jumlah', 'jumlah-' . $data['jumlah'], FALSE);
+        $this->db->where('id', $data['inventaris_id']);
+        $this->db->update('inventaris');
+    }
 }
+

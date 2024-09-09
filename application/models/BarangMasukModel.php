@@ -1,40 +1,24 @@
 <?php
 class BarangMasukModel extends CI_Model {
-    
-    // Get all inventaris data
-    public function get_all_inventaris() {
-        return $this->db->get('inventaris')->result_array();
+
+    // Get all barang masuk data with related inventaris name
+    public function get_all_barang_masuk() {
+        $this->db->select('barang_masuk.*, inventaris.nama_barang');
+        $this->db->from('barang_masuk');
+        $this->db->join('inventaris', 'barang_masuk.inventaris_id = inventaris.id');
+        return $this->db->get()->result_array();
     }
 
-    // Insert a new inventaris record
-    public function insert_inventaris($data) {
-        return $this->db->insert('inventaris', $data);
-    }
-
-    // Get a single inventaris record by ID
-    public function get_inventaris_by_id($id) {
-        return $this->db->get_where('inventaris', array('id' => $id))->row_array();
-    }
-
-    // Update an existing inventaris record by ID
-    public function update_inventaris($id, $data) {
-        $this->db->where('id', $id);
-        return $this->db->update('inventaris', $data);
-    }
-
-    // Delete an inventaris record by ID
-    public function delete_inventaris($id) {
-        $this->db->where('id', $id);
-        return $this->db->delete('inventaris');
-    }
-
-
+    // Insert a new barang masuk record
     public function insert_barang_masuk($data) {
-        return $this->db->insert('barang_masuk', $data);
-    }
-
-    // Insert Barang Keluar
-    public function insert_barang_keluar($data) {
-        return $this->db->insert('barang_keluar', $data);
+        // Insert barang masuk record
+        if ($this->db->insert('barang_masuk', $data)) {
+            // Update the quantity in the inventaris table (add to stock)
+            $this->db->set('jumlah', 'jumlah + ' . (int) $data['jumlah'], FALSE);
+            $this->db->where('id', $data['inventaris_id']);
+            return $this->db->update('inventaris');
+        } else {
+            return false; // Handle insertion failure
+        }
     }
 }

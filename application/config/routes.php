@@ -51,5 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['default_controller'] = 'InventarisController';
+$route['default_controller'] = 'Dashboard';
 $route['inventaris'] = 'InventarisController/index';
+$route['barang_masuk'] = 'BarangMasukController/index';
+$route['barang_keluar'] = 'BarangKeluarController/index';

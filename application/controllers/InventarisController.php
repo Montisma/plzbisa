@@ -9,11 +9,10 @@ class InventarisController extends CI_Controller {
     }
 
     public function index() {
-        $data['title'] = 'Inventory Management';  // Set page title
-        $data['content'] = $this->load->view('inventaris_view', NULL, TRUE);  // Load inventaris_view into $content
-        $this->load->view('layouts/main', $data);  // Pass the data to the main layout
+        $data['title'] = 'Inventory Management';  
+        $data['content'] = $this->load->view('inventaris_view', NULL, TRUE);
+        $this->load->view('layouts/main', $data);
     }
-    
 
     // Fetch all inventaris data
     public function fetch() {
@@ -77,5 +76,26 @@ class InventarisController extends CI_Controller {
             echo json_encode(array("status" => FALSE, "error" => validation_errors()));
             exit();
         }
+    }
+
+    // Handle Barang Masuk (add stock)
+    public function barang_masuk() {
+        $data = array(
+            'inventaris_id' => $this->input->post('inventaris_id'),
+            'jumlah' => $this->input->post('jumlah'),
+            'tanggal_masuk' => date('Y-m-d H:i:s')
+        );
+        $this->InventarisModel->barang_masuk($data);
+        echo json_encode(array("status" => TRUE));
+    }
+
+    // Handle Barang Keluar (reduce stock)
+    public function barang_keluar() {
+        $data = array(
+            'inventaris_id' => $this->input->post('inventaris_id'),
+            'jumlah' => $this->input->post('jumlah')
+        );
+        $this->InventarisModel->barang_keluar($data);
+        echo json_encode(array("status" => TRUE));
     }
 }
