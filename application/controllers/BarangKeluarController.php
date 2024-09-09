@@ -9,7 +9,7 @@ class BarangKeluarController extends CI_Controller {
     }
 
     public function index() {
-        $data['title'] = 'Barang Keluar Management';
+        $data['title'] = 'Barang keluar Management';
         $data['inventaris'] = $this->InventarisModel->get_all_inventaris(); // Fetch all inventaris data
         $data['content'] = $this->load->view('barang_keluar_view', $data, TRUE);
         $this->load->view('layouts/main', $data);
@@ -26,7 +26,7 @@ class BarangKeluarController extends CI_Controller {
         $data = array(
             'inventaris_id' => $this->input->post('inventaris_id'),
             'jumlah' => $this->input->post('jumlah'),
-            'tanggal_keluar' => $this->input->post('tanggal_keluar')
+            'tanggal_keluar' => date('Y-m-d H:i:s') // Assuming you're using the current time for barang keluar
         );
         $this->BarangKeluarModel->insert_barang_keluar($data);
         echo json_encode(array("status" => TRUE));
