@@ -133,7 +133,7 @@ var save_method;
 function add_item() {
     save_method = 'add';
     $('#form')[0].reset(); // Reset form pada modal
-    $('#modal_form').modal('show'); // Menampilkan modal
+    $('#modal_form').modal('show'); // Menampilkan modalddddd
     $('#modal_title').text('Add Item'); // Ubah judul modal
 }
 
