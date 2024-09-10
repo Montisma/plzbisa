@@ -47,6 +47,12 @@
         </a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('index.php/logout'); ?>">
+        <i class="fas fa-sign-out-alt"></i>
+            <span>Log Out</span>
+        </a>
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
 </ul>

@@ -1,5 +1,9 @@
 <?php
 class InventarisModel extends CI_Model {
+
+    public function __construct() {
+        $this->load->database();
+    }
     
     // Get all inventaris data
     public function get_all_inventaris() {
@@ -48,5 +52,31 @@ class InventarisModel extends CI_Model {
         $this->db->where('id', $data['inventaris_id']);
         $this->db->update('inventaris');
     }
+
+    public function get_total_items() {
+        $this->db->select_sum('jumlah');
+        $query = $this->db->get('inventaris');
+        return $query->row()->jumlah;
+    }
+
+    public function get_total_masuk() {
+        $this->db->select_sum('jumlah');
+        $query = $this->db->get('barang_masuk');
+        return $query->row()->jumlah;
+    }
+
+    public function get_total_keluar() {
+        $this->db->select_sum('jumlah');
+        $query = $this->db->get('barang_keluar');
+        return $query->row()->jumlah;
+    }
+
+    public function get_inventory_data() {
+        $this->db->select('kategori_barang, SUM(jumlah) as total');
+        $this->db->group_by('kategori_barang');
+        $query = $this->db->get('inventaris');
+        return $query->result_array();
+    }
+    
 }
 
