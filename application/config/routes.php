@@ -51,7 +51,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['default_controller'] = 'Dashboard';
+$route['default_controller'] = 'InventarisController';
 $route['inventaris'] = 'InventarisController/index';
 $route['barang_masuk'] = 'BarangMasukController/index';
 $route['barang_keluar'] = 'BarangKeluarController/index';
+$route['dashboard'] = 'DashboardController/index';
+$route['login'] = 'AuthController/login';
+$route['register'] = 'AuthController/register';
+$route['logout'] = 'AuthController/logout';
+
